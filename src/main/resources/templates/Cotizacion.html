@@ -1,0 +1,279 @@
+<!--
+	Practica 5- Miriam Colino
+	Pagina secundaria Cotizacion (API)
+	Hago fetch de una API de bolsa de la compañia Repsol del pagina web https://www.alphavantage.co/
+	Se muestra una tabla con información diaria, semanal y mensual, en cuanto se pulse el boton correspondiente.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+
+    //DIARIA
+    function genera_tabla1()
+    {
+
+        fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=REPYY&apikey=GLYG13Y49P0KIKR5')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                var data_particular= data["Time Series (Daily)"];
+                data_aux = Object.keys(data_particular);
+                array_acortado = data_aux.slice(0, 15);
+                crearTabla(data_particular,array_acortado,'tabla1');
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+
+    }
+
+
+    //SEMANAL
+     function genera_tabla2()
+    {
+
+        fetch('https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=REPYY&apikey=GLYG13Y49P0KIKR5')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                 var data_particular= data["Weekly Time Series"];
+                data_aux = Object.keys(data_particular);
+                array_acortado = data_aux.slice(0, 15);
+                crearTabla(data_particular,array_acortado,'tabla2');
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+
+    }
+
+
+    //MENSUAL
+     function genera_tabla3()
+    {
+
+        fetch('https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=REPYY&apikey=GLYG13Y49P0KIKR5')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                var data_particular= data["Monthly Time Series"];
+                data_aux = Object.keys(data_particular);
+                array_acortado = data_aux.slice(0, 15);
+                crearTabla(data_particular,array_acortado,'tabla3');
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+
+
+    }
+    function crearTabla(data_particular,arrray_acortado,div)
+    {
+            var titulo;
+
+              if(div=='tabla1')
+              {
+                    titulo= "COTIZACIÓN DIARIA";
+              }
+              if(div=='tabla2')
+              {
+                    titulo= "COTIZACIÓN SEMANAL";
+              }
+              if(div=='tabla3')
+              {
+                    titulo="COTIZACIÓN MENSUAL";
+              }
+              var body = document.getElementById(div);
+              var tabla   = document.createElement("table");
+              var tblBody = document.createElement("tbody");
+
+              var fila_0 = document.createElement("tr");
+              var fila_1 = document.createElement("tr");
+
+
+              var celda0 = document.createElement("td");
+
+              var celda1 = document.createElement("td");
+              var celda2 = document.createElement("td");
+              var celda3= document.createElement("td");
+              var celda4 = document.createElement("td");
+              var celda5 = document.createElement("td");
+              var celda6 = document.createElement("td");
+
+              var textoCelda0 = document.createTextNode(titulo);
+              fila_0.appendChild(textoCelda0);
+              tblBody.appendChild(fila_0);
+
+               var textoCelda1 = document.createTextNode("Day");
+               var textoCelda2 = document.createTextNode("Open");
+               var textoCelda3 = document.createTextNode("High");
+               var textoCelda4 = document.createTextNode("Low");
+               var textoCelda5 = document.createTextNode("Close");
+               var textoCelda6 = document.createTextNode("Volume");
+
+               celda1.appendChild(textoCelda1);
+               celda2.appendChild(textoCelda2);
+               celda3.appendChild(textoCelda3);
+               celda4.appendChild(textoCelda4);
+               celda5.appendChild(textoCelda5);
+               celda6.appendChild(textoCelda6);
+
+               fila_1.appendChild(celda1);
+               fila_1.appendChild(celda2);
+               fila_1.appendChild(celda3);
+               fila_1.appendChild(celda4);
+               fila_1.appendChild(celda5);
+               fila_1.appendChild(celda6);
+
+               tblBody.appendChild(fila_1);
+
+               var long=(array_acortado).length;
+
+
+                for(let i=0; i<long; i++)
+                {
+                    value=array_acortado[i];
+
+
+                     var fila_siguiente = document.createElement("tr");
+
+                      var celda7 = document.createElement("td");
+                      var celda8 = document.createElement("td");
+                      var celda9= document.createElement("td");
+                      var celda10 = document.createElement("td");
+                      var celda11 = document.createElement("td");
+                      var celda12 = document.createElement("td");
+
+
+                       var textoCelda7 = document.createTextNode(array_acortado[i]);
+                       var textoCelda8 = document.createTextNode(data_particular[value]["1. open"]);
+                       var textoCelda9 = document.createTextNode(data_particular[value]["2. high"]);
+                       var textoCelda10 = document.createTextNode(data_particular[value]["3. low"]);
+                       var textoCelda11 = document.createTextNode(data_particular[value]["4. close"]);
+                       var textoCelda12 = document.createTextNode(data_particular[value]["5. volume"]);
+
+                       celda7.appendChild(textoCelda7);
+                       celda8.appendChild(textoCelda8);
+                       celda9.appendChild(textoCelda9);
+                       celda10.appendChild(textoCelda10);
+                       celda11.appendChild(textoCelda11);
+                       celda12.appendChild(textoCelda12);
+
+                       fila_siguiente.appendChild(celda7);
+                       fila_siguiente.appendChild(celda8);
+                       fila_siguiente.appendChild(celda9);
+                       fila_siguiente.appendChild(celda10);
+                       fila_siguiente.appendChild(celda11);
+                       fila_siguiente.appendChild(celda12);
+
+                       tblBody.appendChild(fila_siguiente);
+
+                }
+
+              tabla.appendChild(tblBody);
+              body.appendChild(tabla);
+              tabla.setAttribute("border", "3");
+              tabla.style.color = "black";
+
+
+}
+
+     </script>
+
+    <style>
+        .derecha {
+            margin: 1%;
+            position: absolute;
+            top=100%
+            right: 50%;
+            left: 90%;
+        }
+
+        footer {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 20px;
+        }
+        .Row {
+            width: 100%;
+
+        }
+        .Column {
+            display: table-cell;
+        }
+
+
+	</style>
+</head>
+
+<body>
+
+    <div class="derecha">
+        <a href="index.html" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-home" align="left"></span> Home
+        </a>
+    </div>
+
+    <div class="container-fluid p-5 text-white text-center" style="background-color:#fa9e56;">
+        <div style="position:absolute">
+            <img src="https://miriamcol.github.io/Practica4/Resources/logo-repsol-removebg-preview.png" width="40%" height="40%" align="left">
+        </div>
+        </br></br>
+
+        <h1 style="color:white;">Cotización en Bolsa</h1>
+
+    </div>
+
+
+
+    <div class="container" style="text-align: center;">
+        <h3>Consulte el precio de apertura(Open), el máximo del día (High), el mínimo (Low), el precio de cierre (Close) y el volumen</h3>
+        <button type="button" class="btn btn-warning btn-lg" onclick="genera_tabla1()" >DIARIA <br> (Últimos 15 días) </button>
+        <button type="button" class="btn btn-warning btn-lg"  onclick="genera_tabla2()" >SEMANAL <br> (Últimas 15 semanas)</button>
+        <button type="button" class="btn btn-warning btn-lg" onclick="genera_tabla3()">MENSUAL <br> (Últimos 15 meses)</button>
+    </div>
+
+    <!--
+    <div style="background-image: url('https://miriamcol.github.io/Practica4/Resources/bolsa.jpg');opacity: 0.5; height:100%;">
+        <div id="tabla" align="center">
+        </div>
+    </div>
+    -->
+
+
+    <div class="Row">
+        <br>
+        <div class="Column" id="tabla1"></div>
+        <div class="Column" id="tabla2"></div>
+        <div class="Column" id="tabla3"></div>
+    </div>
+
+
+    <!--
+    <div style="background-image: url('https://miriamcol.github.io/Practica4/Resources/bolsa.jpg');opacity: 0.5; height:100%" >
+            hjkfdslfhsdfhsdjkafhkjsdhfjkdsahjkfdsklfsd fsdajklflkdsfhnkjsejknsdjkfnsdjkbfjsdbfhbsd
+    </div>
+    -->
+    <!--
+    <img src="https://miriamcol.github.io/Practica4/Resources/bolsa.jpg" alt="Forest" width="100%" height="100%" style="opacity: 0.5";>
+    -->
+
+
+
+</body >
+
+</html>

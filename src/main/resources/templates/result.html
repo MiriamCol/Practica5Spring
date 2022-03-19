@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Handling Form Submission</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <h1>Datos introducidos por el usuario</h1>
+  <p th:text="'Nombre: ' + ${registrarse.fname}" />
+  <p th:text="'Apellidos: ' + ${registrarse.lname}" />
+  <p th:text="'Edad: ' + ${registrarse.age}" />
+  <p th:text="'Identificación: ' + ${registrarse.ident}" />
+  <p th:text="'Contraseña: ' + ${registrarse.pass}" />
+  <a href="/registrarse">Volver a introducir los datos</a>
+</body>
+</html>
