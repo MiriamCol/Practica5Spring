@@ -3,6 +3,7 @@
 <head>
   <title>Getting Started: Handling Form Submission</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <!--
   <script type="text/javascript">
     function hola()
     {
@@ -13,6 +14,7 @@
       }
       setTimeout(function(){hola();}, 1000)
 </script>
+-->
 </head>
 <body onload="hola()">
   <!--
@@ -29,9 +31,6 @@
 
   <p id="json"></p>
 
-  <button type="button" onclick="hola()" >PULSAME</button>
-
-
   <script type="text/javascript">
     function hola()
     {
@@ -41,7 +40,7 @@
       var c =  "[[${registrarse.age}]]";
       var d =  "[[${registrarse.ident}]]";
       var e =  "[[${registrarse.pass}]]";
-      //alert(b);
+
       var datos  = [];
       var objeto = {};
 
@@ -56,7 +55,7 @@
       objeto.datos = datos;
       console.log(JSON.stringify(objeto));
 
-      document.getElementById('json').innerHTML=JSON.stringify(objeto);
+      document.getElementById('json').innerHTML=JSON.stringify(objeto,null,'\t');
 
      }
       setTimeout(function(){hola();}, 1000)

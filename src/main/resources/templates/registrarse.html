@@ -50,7 +50,7 @@
 
 
 
-<form action="#" th:action="@{/}" th:object="${registrarse}" method="post">
+<form action="#" th:action="@{/info}" th:object="${registrarse}" method="post">
   <div class="w3-panel w3-border w3-round-xlarge text-center">
     <div class="field">
       <p>Nombre: <input type="text" th:field="*{fname}" /></p>
@@ -59,7 +59,7 @@
     </div>
     <div class="field">
       <p>Apellidos: <input type="text" th:field="*{lname}"/></p>
-      <small class="form-text text-danger" th:if="${#fields.hasErrors('lname')}" th:errors="*{l}"></small>
+      <small class="form-text text-danger" th:if="${#fields.hasErrors('lname')}" th:errors="*{lname}"></small>
       <br><br>
     </div>
     <div class="field">

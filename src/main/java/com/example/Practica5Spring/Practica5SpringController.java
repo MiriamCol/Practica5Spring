@@ -26,42 +26,21 @@ public class Practica5SpringController implements WebMvcConfigurer {
         return "registrarse";
     }
 
-    @GetMapping("/prueba")
-    public String getPrueba(Model model) {
 
-        return "prueba.json";
-    }
 
-    @GetMapping("/proc")
-    public String getprog(Model model) {
-
-        return "Proyectos";
-    }
-
-    @PostMapping("/")
-    public String greetingSubmit(@ModelAttribute Registro registrarse ,@Valid Registro registro, BindingResult bindingResult, Model model)
+    @PostMapping("/info")
+    public String greetingSubmit(@Valid @ModelAttribute("registrarse") Registro registrarse, BindingResult bindingResult, Model model)
     {
-
-
         model.addAttribute("registrarse", registrarse);
-        /*
-        JSONObject myObject = new JSONObject();
-        myObject.put("name", "Carlos");
-        myObject.put("name", "Carlos");
-        myObject.put("name", "Carlos");
-        myObject.put("name", "Carlos");
-        */
-
-
 
         if (bindingResult.hasErrors()) {
             return "registrarse";
-
         }
-
 
         return "result";
     }
+
+
 
 
 
