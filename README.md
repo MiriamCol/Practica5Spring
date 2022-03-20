@@ -5,4 +5,5 @@ Miriam Colino Ruiperez- 201804334
 - Los html de la práctica están en: Practica5Spring/src/main/resources/templates/
 - He hecho uso de Thymeleaf: https://www.thymeleaf.org/ en registrarse.html.
 - He usado Java Bean Validation’s @Valid constraint para validar los campos introducidos.
+- No funciona el botón de Home porque no se puede ir al resto de páginas html que aparecen.
 - Si algo ha ido mal en el funcionamiento de esta práctica, salta a la pagina error.html mostrando un mensaje.

@@ -27,7 +27,6 @@ public class Practica5SpringController implements WebMvcConfigurer {
     }
 
 
-
     @PostMapping("/info")
     public String greetingSubmit(@Valid @ModelAttribute("registrarse") Registro registrarse, BindingResult bindingResult, Model model)
     {
