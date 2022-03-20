@@ -4,7 +4,7 @@
 -->
 
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -50,18 +50,21 @@
 
 
 
-<form action="#" th:action="@{/result}" th:object="${registrarse}" method="post">
+<form action="#" th:action="@{/}" th:object="${registrarse}" method="post">
   <div class="w3-panel w3-border w3-round-xlarge text-center">
     <div class="field">
       <p>Nombre: <input type="text" th:field="*{fname}" /></p>
+      <small class="form-text text-danger" th:if="${#fields.hasErrors('fname')}" th:errors="*{fname}"></small>
         <br><br>
     </div>
     <div class="field">
       <p>Apellidos: <input type="text" th:field="*{lname}"/></p>
+      <small class="form-text text-danger" th:if="${#fields.hasErrors('lname')}" th:errors="*{l}"></small>
       <br><br>
     </div>
     <div class="field">
       <p>Edad: <input type="text" th:field="*{age}"/></p>
+      <small class="form-text text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small>
       <br><br>
     </div>
 
@@ -75,15 +78,20 @@
     </div>
     <div class="field">
       <p>Identificacion: <input type="text" th:field="*{ident}"/></p>
+      <small class="form-text text-danger" th:if="${#fields.hasErrors('ident')}" th:errors="*{ident}"></small>
       <br><br>
     </div>
     <div class="field">
       <p>Contraseña: <input type="password" th:field="*{pass}"/></p>
+      <small class="form-text text-danger" th:if="${#fields.hasErrors('pass')}" th:errors="*{pass}"></small>
       <br><br>
     </div>
 
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
   </div>
+
+
+
 </form>
 
 <!--

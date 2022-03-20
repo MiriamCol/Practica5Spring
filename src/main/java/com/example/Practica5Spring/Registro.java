@@ -1,9 +1,12 @@
 package com.example.Practica5Spring;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 public class Registro {
+
     @NotNull
     @Size(min=2, max=30)
     private String fname;
@@ -65,5 +68,6 @@ public class Registro {
     public void setLname(String lname) {
         this.lname = lname;
     }
+
 
 }
